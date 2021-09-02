@@ -4,7 +4,8 @@
     <div class="">
       <TradesNav />
       <div class="">
-        <NuxtChild :data="data" />
+        <div v-if="loading" class="h-60 w-full flex items-center justify-center"><BaseLoader /></div>
+        <NuxtChild v-if="!loading && !error" :data="data" />
       </div>
     </div>
   </main>
