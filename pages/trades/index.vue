@@ -1,5 +1,10 @@
 <template>
   <section class="">
+    <header class="rounded-md bg-gray-50 my-6 p-4">
+      <div action="" class="flex justify-between items-center md:space-x-16 space-x-4">
+        <TradesSearch />
+      </div>
+    </header>
     <AppTable :data="filteredData" />
   </section>
 </template>
@@ -15,7 +20,16 @@ export default {
 
   computed: {
     filteredData() {
-      return this.data
+      return this.data.filter((d) => this.matchSearchQuery(d.title))
+    },
+  },
+
+  methods: {
+    matchSearchQuery(str) {
+      let { search_query: searchQuery } = this.$route.query
+      if (searchQuery === null) searchQuery = ''
+      const searchRegex = new RegExp(searchQuery, 'i')
+      return str.match(searchRegex)
     },
   },
 }
