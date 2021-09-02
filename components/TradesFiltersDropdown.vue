@@ -52,6 +52,8 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
+
 export default {
   props: {
     cols: {
@@ -82,13 +84,21 @@ export default {
   },
 
   methods: {
+    // ...mapActions(['updateHiddenCols']),
     toggleCol(col) {
       if (this.inHiddenCols(col)) {
         this.removeHiddenCol(col)
+        let hiddenCols = JSON.parse(localStorage.getItem('hiddenCols') || '[]')
+        hiddenCols = hiddenCols.filter((c) => col !== c)
+        localStorage.setItem('hiddenCols', JSON.stringify(hiddenCols))
       } else {
         this.addHiddenCol(col)
+        const hiddenCols = JSON.parse(localStorage.getItem('hiddenCols') || '[]')
+        console.log('wtf', hiddenCols)
+        localStorage.setItem('hiddenCols', JSON.stringify([...hiddenCols, col]))
       }
     },
+
     inHiddenCols(col) {
       const hiddenCols = this.$route.query.hidden_cols
       if (col.toLowerCase() === 'id') return true
@@ -96,6 +106,7 @@ export default {
       if (typeof hiddenCols === 'string') return col.toLowerCase() === hiddenCols.toLowerCase()
       if (Array.isArray(hiddenCols)) return hiddenCols.find((c) => c.toLowerCase() === col.toLowerCase())
     },
+
     addHiddenCol(col) {
       let hiddenCols = this.$route.query.hidden_cols
       if (hiddenCols === undefined) hiddenCols = []
@@ -107,7 +118,7 @@ export default {
     removeHiddenCol(col) {
       let hiddenCols = this.$route.query.hidden_cols
       if (hiddenCols === undefined) hiddenCols = []
-      if (typeof filter === 'string') hiddenCols = [hiddenCols]
+      if (typeof hiddenCols === 'string') hiddenCols = [hiddenCols]
 
       const newHiddenCols = hiddenCols.filter((st) => st !== col)
       this.$router.push({ query: { ...this.$route.query, hidden_cols: newHiddenCols } })

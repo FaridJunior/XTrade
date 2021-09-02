@@ -1,7 +1,7 @@
 <template>
   <tr class="hover:bg-indigo-50 cursor-pointer">
     <td v-for="cell in cells" :key="cell" class="px-6 py-4 whitespace-nowrap">
-      <p class="font-medium text-sm font-sans">{{ cell }}</p>
+      <p class="font-medium text-sm font-sans"><DynamicBadge :text="cell" /></p>
     </td>
   </tr>
 </template>
