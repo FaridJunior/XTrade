@@ -52,8 +52,6 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
-
 export default {
   props: {
     cols: {
@@ -84,18 +82,11 @@ export default {
   },
 
   methods: {
-    // ...mapActions(['updateHiddenCols']),
     toggleCol(col) {
       if (this.inHiddenCols(col)) {
         this.removeHiddenCol(col)
-        let hiddenCols = JSON.parse(localStorage.getItem('hiddenCols') || '[]')
-        hiddenCols = hiddenCols.filter((c) => col !== c)
-        localStorage.setItem('hiddenCols', JSON.stringify(hiddenCols))
       } else {
         this.addHiddenCol(col)
-        const hiddenCols = JSON.parse(localStorage.getItem('hiddenCols') || '[]')
-        console.log('wtf', hiddenCols)
-        localStorage.setItem('hiddenCols', JSON.stringify([...hiddenCols, col]))
       }
     },
 
