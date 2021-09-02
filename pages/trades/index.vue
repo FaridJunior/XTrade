@@ -5,6 +5,7 @@
         <TradesSearch />
         <div class="flex items-center md:space-x-6 space-x-2">
           <TradesFiltersDropdown :cols="cols" />
+          <TradesExportDropdown :data="filteredData" />
         </div>
       </div>
     </header>

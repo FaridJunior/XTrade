@@ -96,7 +96,6 @@ export default {
       if (typeof hiddenCols === 'string') return col.toLowerCase() === hiddenCols.toLowerCase()
       if (Array.isArray(hiddenCols)) return hiddenCols.find((c) => c.toLowerCase() === col.toLowerCase())
     },
-
     addHiddenCol(col) {
       let hiddenCols = this.$route.query.hidden_cols
       if (hiddenCols === undefined) hiddenCols = []
