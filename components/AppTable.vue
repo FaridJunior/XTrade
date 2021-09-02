@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 <template>
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto">
@@ -13,6 +12,7 @@
         </div>
       </div>
     </div>
+    <AppTablePagination :max="data.length" :number-of-rows="NUMBER_OF_ROWS" />
   </div>
 </template>
 
@@ -25,9 +25,16 @@ export default {
     },
   },
 
+  data() {
+    return {
+      NUMBER_OF_ROWS: 5,
+    }
+  },
+
   computed: {
     displayedRows() {
-      return this.data
+      const page = +(this.$route.query.page || 1)
+      return this.data.slice((page - 1) * this.NUMBER_OF_ROWS, page * this.NUMBER_OF_ROWS)
     },
   },
 }
