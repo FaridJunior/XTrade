@@ -30,10 +30,10 @@ export default {
 
   methods: {
     async fetchData() {
-      const posts = await this.$axios.$get('/todos')
+      const data = await this.$axios.$get('/todos')
 
       this.loading = false
-      this.users = posts
+      this.data = data
     },
   },
 }
