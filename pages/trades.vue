@@ -1,6 +1,9 @@
 <template>
-  <main class="flex items-center justify-center min-h-screen w-full">
-    <h2 class="text-4xl text-gray-600 text-center">Trades Page</h2>
+  <main class="w-full lg:p-6 p-4">
+    <TradesHeader />
+    <div class="">
+      <TradesNav />
+    </div>
   </main>
 </template>
 <script>
