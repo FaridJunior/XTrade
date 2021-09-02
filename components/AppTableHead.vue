@@ -16,7 +16,17 @@ export default {
   },
   computed: {
     cols() {
-      return Object.keys(this.row)
+      return Object.keys(this.row).filter((col) => !this.inHiddenCols(col))
+    },
+  },
+
+  methods: {
+    inHiddenCols(col) {
+      const hiddenCols = this.$route.query.hidden_cols
+      if (col.toLowerCase() === 'id') return true
+      if (!hiddenCols) return false
+      if (typeof hiddenCols === 'string') return col.toLowerCase() === hiddenCols.toLowerCase()
+      if (Array.isArray(hiddenCols)) return hiddenCols.find((c) => c.toLowerCase() === col.toLowerCase())
     },
   },
 }
